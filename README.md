@@ -7,13 +7,17 @@ Analyze how a website changes over time using archived snapshots from the Waybac
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage](screenshots/home.png)
+![Homepage](home.jpeg)
 
 ### Results Page
-![Results](screenshots/results.png)
+![Results](results.jpeg)
 
 ### Charts & Analysis
-![Charts](screenshots/charts.png)
+![Charts](chart.jpeg)
+
+### Simhashes
+![Web Archieves](simhash.jpeg)
+
 
 ---
 
