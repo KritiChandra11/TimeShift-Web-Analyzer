@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We-Go-Wayback - Archive Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🕰️ We-Go-Wayback</h1>
+            <p class="subtitle">Analyze web archive content changes using simhash fingerprints</p>
+        </header>
+
+        <!-- Calculator Form -->
+        <section class="calculator-section">
+            <div class="card">
+                <h2>Calculate Simhash</h2>
+                <form id="calculatorForm">
+                    <div class="form-group">
+                        <label for="url">Website URL:</label>
+                        <input 
+                            type="text" 
+                            id="url" 
+                            placeholder="e.g., bbc.co.uk or wikipedia.org" 
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year:</label>
+                        <input 
+                            type="number" 
+                            id="year" 
+                            placeholder="e.g., 2015" 
+                            min="1996" 
+                            max="2025" 
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span id="submitText">Calculate</span>
+                        <span id="submitLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Job Status Tracker -->
+        <section id="statusSection" class="status-section" style="display: none;">
+            <div class="card">
+                <h2>Job Status</h2>
+                <div class="status-info">
+                    <p><strong>Job ID:</strong> <span id="jobId"></span></p>
+                    <p><strong>Status:</strong> <span id="jobStatus" class="status-badge">PENDING</span></p>
+                    <p><strong>Duration:</strong> <span id="jobDuration">Calculating...</span></p>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <p class="status-message" id="statusMessage">Fetching snapshots from Wayback Machine...</p>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="results-section" style="display: none;">
+            <div class="card">
+                <h2>Results</h2>
+                
+                <!-- Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalSnapshots">0</div>
+                        <div class="stat-label">Total Snapshots</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="uniqueVersions">0</div>
+                        <div class="stat-label">Unique Versions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="changeFrequency">0%</div>
+                        <div class="stat-label">Change Frequency</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="dateRange">-</div>
+                        <div class="stat-label">Date Range</div>
+                    </div>
+                </div>
+
+                <!-- Timeline Visualization -->
+                <div class="timeline-container">
+                    <h3>Content Change Timeline</h3>
+                    <canvas id="timelineChart"></canvas>
+                </div>
+
+                <!-- Results Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Snapshot Details</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-small" onclick="exportToCSV()">Export CSV</button>
+                            <button class="btn btn-small" onclick="exportToJSON()">Export JSON</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="resultsTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Timestamp</th>
+                                    <th>Date & Time</th>
+                                    <th>Simhash</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                                <!-- Results will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Section -->
+        <section id="errorSection" class="error-section" style="display: none;">
+            <div class="card error-card">
+                <h2>⚠️ Error</h2>
+                <p id="errorMessage"></p>
+                <button class="btn btn-secondary" onclick="resetForm()">Try Again</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Powered by Wayback Machine API | Built with ❤️ for archive analysis</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
