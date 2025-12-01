@@ -10,7 +10,7 @@ Analyze how a website changes over time using archived snapshots from the Waybac
 ![Homepage](home.jpeg)
 
 ### Results Page
-![Results](results.jpeg)
+![Results](result.jpeg)
 
 ### Charts & Analysis
 ![Charts](chart.jpeg)
